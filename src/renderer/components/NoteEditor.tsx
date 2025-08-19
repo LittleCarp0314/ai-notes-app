@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import Editor from '@monaco-editor/react';
+import MDEditor from '@uiw/react-md-editor';
+import '@uiw/react-md-editor/markdown-editor.css';
+import '@uiw/react-markdown-preview/markdown.css';
 import { Note } from '../../types';
 import { useNotesStore } from '../stores/useNotesStore';
 import { useUIStore } from '../stores/useUIStore';
@@ -118,27 +120,7 @@ export const NoteEditor: React.FC<NoteEditorProps> = ({ note, onSave }) => {
     onSave?.(updatedNote);
   }, [note, updateNote, onSave]);
 
-  // 编辑器挂载处理
-  const handleEditorDidMount = useCallback((editor: any) => {
-    editorRef.current = editor;
-    
-    // 设置编辑器快捷键
-    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
-      autoSave();
-    });
-    
-    // 设置编辑器选项
-    editor.updateOptions({
-      fontSize: 14,
-      lineHeight: 1.6,
-      wordWrap: 'on',
-      minimap: { enabled: false },
-      scrollBeyondLastLine: false,
-      renderLineHighlight: 'none',
-      hideCursorInOverviewRuler: true,
-      overviewRulerBorder: false,
-    });
-  }, [autoSave]);
+
 
   // 格式化最后保存时间
   const formatLastSaved = (date: Date) => {
@@ -151,24 +133,7 @@ export const NoteEditor: React.FC<NoteEditorProps> = ({ note, onSave }) => {
     return date.toLocaleDateString();
   };
 
-  // 渲染Markdown预览
-  const renderPreview = () => {
-    // 简单的Markdown渲染（后续可以用react-markdown替换）
-    const htmlContent = content
-      .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-      .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-      .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-      .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
-      .replace(/\*(.*)\*/gim, '<em>$1</em>')
-      .replace(/\n/gim, '<br>');
 
-    return (
-      <div 
-        className="prose prose-sm max-w-none p-4 h-full overflow-auto"
-        dangerouslySetInnerHTML={{ __html: htmlContent }}
-      />
-    );
-  };
 
   if (!note && !title && !content) {
     return (
@@ -247,30 +212,23 @@ export const NoteEditor: React.FC<NoteEditorProps> = ({ note, onSave }) => {
 
       {/* 编辑器内容区域 */}
       <div className="flex-1 relative">
-        {isPreview ? (
-          renderPreview()
-        ) : (
-          <Editor
-            height="100%"
-            defaultLanguage="markdown"
-            value={content}
-            onChange={handleContentChange}
-            onMount={handleEditorDidMount}
-            theme={theme === 'dark' ? 'vs-dark' : 'light'}
-            options={{
-              wordWrap: 'on',
-              minimap: { enabled: false },
-              scrollBeyondLastLine: false,
+        <MDEditor
+          value={content}
+          onChange={(val) => handleContentChange(val || '')}
+          data-color-mode={theme}
+          height={400}
+          preview={isPreview ? 'preview' : 'edit'}
+          hideToolbar={false}
+          visibleDragBar={false}
+          textareaProps={{
+            placeholder: '开始编写你的笔记...',
+            style: {
               fontSize: 14,
               lineHeight: 1.6,
-              padding: { top: 16, bottom: 16 },
-              renderLineHighlight: 'none',
-              hideCursorInOverviewRuler: true,
-              overviewRulerBorder: false,
-              automaticLayout: true,
-            }}
-          />
-        )}
+              fontFamily: 'ui-monospace, SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, monospace',
+            },
+          }}
+        />
       </div>
     </div>
   );

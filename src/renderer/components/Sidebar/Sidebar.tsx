@@ -125,8 +125,10 @@ const Sidebar: React.FC = () => {
     });
   };
 
+  const { theme } = useUIStore();
+  
   return (
-    <div className="h-full flex flex-col bg-gray-50 dark:bg-gray-900">
+    <div className={`h-full flex flex-col ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
       {/* 头部 */}
       <div className="p-4 border-b border-gray-200 dark:border-gray-700">
         <h1 className="text-lg font-semibold text-gray-900 dark:text-white">

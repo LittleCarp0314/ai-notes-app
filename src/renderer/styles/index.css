@@ -325,3 +325,56 @@ html, body {
   70% { transform: scale(0.9); }
   100% { transform: scale(1); opacity: 1; }
 }
+
+/* MDEditor 自定义样式 */
+.w-md-editor {
+  background-color: transparent !important;
+}
+
+.w-md-editor.w-md-editor-dark {
+  background-color: #000000 !important;
+}
+
+.w-md-editor-text-container {
+  background-color: transparent !important;
+}
+
+.w-md-editor.w-md-editor-dark .w-md-editor-text-container {
+  background-color: #000000 !important;
+}
+
+.w-md-editor-text {
+  background-color: transparent !important;
+  color: #000000 !important;
+}
+
+.w-md-editor.w-md-editor-dark .w-md-editor-text {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+.w-md-editor-toolbar {
+  background-color: #ffffff !important;
+  border-bottom: 1px solid #e5e7eb !important;
+}
+
+.w-md-editor.w-md-editor-dark .w-md-editor-toolbar {
+  background-color: #000000 !important;
+  border-bottom: 1px solid #374151 !important;
+}
+
+.w-md-editor-toolbar-item button {
+  color: #000000 !important;
+}
+
+.w-md-editor.w-md-editor-dark .w-md-editor-toolbar-item button {
+  color: #ffffff !important;
+}
+
+.w-md-editor-toolbar-item button:hover {
+  background-color: #f3f4f6 !important;
+}
+
+.w-md-editor.w-md-editor-dark .w-md-editor-toolbar-item button:hover {
+  background-color: #1f2937 !important;
+}
