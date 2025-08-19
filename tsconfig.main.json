@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "outDir": "dist/main",
+    "module": "CommonJS",
+    "target": "ES2020",
+    "lib": ["ES2020"],
+    "moduleResolution": "node",
+    "allowImportingTsExtensions": false,
+    "jsx": "preserve",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["src/main/**/*"],
+  "exclude": ["src/renderer/**/*", "src/**/*.test.ts", "src/**/*.spec.ts"]
+}

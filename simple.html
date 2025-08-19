@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { color: #333; }
+        .status { padding: 10px; background: #e8f5e8; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AI Notes App - Development Server Test</h1>
+        <div class="status">
+            <p>✅ Server is running successfully!</p>
+            <p>Current time: <span id="time"></span></p>
+        </div>
+        <h2>Next Steps:</h2>
+        <ul>
+            <li>React application is being developed</li>
+            <li>TypeScript compilation is working</li>
+            <li>All dependencies are installed</li>
+        </ul>
+    </div>
+    <script>
+        document.getElementById('time').textContent = new Date().toLocaleString();
+    </script>
+</body>
+</html>
