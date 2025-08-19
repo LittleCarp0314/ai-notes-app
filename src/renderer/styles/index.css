@@ -1,0 +1,327 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* 自定义CSS变量 */
+:root {
+  --sidebar-width: 280px;
+  --header-height: 60px;
+  --border-color: #e5e7eb;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.dark {
+  --border-color: #374151;
+}
+
+/* 基础样式重置 */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 应用布局 */
+.app-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: var(--sidebar-width);
+  min-width: 200px;
+  max-width: 400px;
+  height: 100vh;
+  border-right: 1px solid var(--border-color);
+  background-color: #f9fafb;
+  transition: width 0.2s ease-in-out;
+}
+
+.dark .sidebar {
+  background-color: #1f2937;
+}
+
+.sidebar.collapsed {
+  width: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.main-content {
+  flex: 1;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 编辑器样式 */
+.editor-container {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.monaco-editor {
+  height: 100% !important;
+}
+
+/* 自定义组件样式 */
+.btn {
+  @apply inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-md border border-transparent transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2;
+}
+
+.btn-primary {
+  @apply bg-blue-600 text-white hover:bg-blue-700 focus:ring-blue-500;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 text-gray-900 hover:bg-gray-300 focus:ring-gray-500;
+}
+
+.dark .btn-secondary {
+  @apply bg-gray-700 text-gray-100 hover:bg-gray-600;
+}
+
+.btn-ghost {
+  @apply text-gray-700 hover:bg-gray-100 focus:ring-gray-500;
+}
+
+.dark .btn-ghost {
+  @apply text-gray-300 hover:bg-gray-800;
+}
+
+.btn-sm {
+  @apply px-3 py-1.5 text-xs;
+}
+
+.btn-lg {
+  @apply px-6 py-3 text-base;
+}
+
+/* 输入框样式 */
+.input {
+  @apply block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500;
+}
+
+.dark .input {
+  @apply bg-gray-800 border-gray-600 text-white placeholder-gray-500 focus:ring-blue-400 focus:border-blue-400;
+}
+
+/* 卡片样式 */
+.card {
+  @apply bg-white rounded-lg shadow-sm border border-gray-200;
+}
+
+.dark .card {
+  @apply bg-gray-800 border-gray-700;
+}
+
+/* 列表样式 */
+.list-item {
+  @apply flex items-center px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer transition-colors;
+}
+
+.dark .list-item {
+  @apply text-gray-300 hover:bg-gray-700;
+}
+
+.list-item.active {
+  @apply bg-blue-50 text-blue-700 border-r-2 border-blue-500;
+}
+
+.dark .list-item.active {
+  @apply bg-blue-900 text-blue-300 border-blue-400;
+}
+
+/* 标签样式 */
+.tag {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+
+.tag-blue {
+  @apply bg-blue-100 text-blue-800;
+}
+
+.dark .tag-blue {
+  @apply bg-blue-900 text-blue-300;
+}
+
+.tag-green {
+  @apply bg-green-100 text-green-800;
+}
+
+.dark .tag-green {
+  @apply bg-green-900 text-green-300;
+}
+
+.tag-yellow {
+  @apply bg-yellow-100 text-yellow-800;
+}
+
+.dark .tag-yellow {
+  @apply bg-yellow-900 text-yellow-300;
+}
+
+.tag-red {
+  @apply bg-red-100 text-red-800;
+}
+
+.dark .tag-red {
+  @apply bg-red-900 text-red-300;
+}
+
+/* 工具提示样式 */
+.tooltip {
+  @apply absolute z-50 px-2 py-1 text-xs text-white bg-gray-900 rounded shadow-lg pointer-events-none;
+}
+
+.dark .tooltip {
+  @apply bg-gray-700;
+}
+
+/* 模态框样式 */
+.modal-overlay {
+  @apply fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50;
+}
+
+.modal-content {
+  @apply bg-white rounded-lg shadow-xl max-w-md w-full mx-4;
+}
+
+.dark .modal-content {
+  @apply bg-gray-800;
+}
+
+/* 加载动画 */
+.spinner {
+  @apply inline-block w-4 h-4 border-2 border-gray-300 border-t-blue-600 rounded-full animate-spin;
+}
+
+.dark .spinner {
+  @apply border-gray-600 border-t-blue-400;
+}
+
+/* 拖拽样式 */
+.drag-over {
+  @apply bg-blue-50 border-blue-300 border-dashed;
+}
+
+.dark .drag-over {
+  @apply bg-blue-900 border-blue-600;
+}
+
+/* 搜索高亮 */
+.search-highlight {
+  @apply bg-yellow-200 text-yellow-900;
+}
+
+.dark .search-highlight {
+  @apply bg-yellow-800 text-yellow-200;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .sidebar {
+    position: absolute;
+    z-index: 40;
+    width: 280px;
+    transform: translateX(-100%);
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .main-content {
+    width: 100%;
+  }
+}
+
+/* 自定义滚动条 */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+}
+
+.dark .custom-scrollbar {
+  scrollbar-color: #475569 #1e293b;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-track {
+  background: #1e293b;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #475569;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+.dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #64748b;
+}
+
+/* 动画类 */
+.fade-in {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.slide-in-left {
+  animation: slideInLeft 0.3s ease-out;
+}
+
+.slide-in-right {
+  animation: slideInRight 0.3s ease-out;
+}
+
+.bounce-in {
+  animation: bounceIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes bounceIn {
+  0% { transform: scale(0.3); opacity: 0; }
+  50% { transform: scale(1.05); }
+  70% { transform: scale(0.9); }
+  100% { transform: scale(1); opacity: 1; }
+}
